@@ -2,6 +2,7 @@
 
 import Stores from "../store";
 import Actions from "../actions/appActions";
+import { incrementNum, decrementNum } from "../actions/appActions";
 
 const AppDispatcher = {
   setUserLoggedIn: (data) => {
@@ -16,6 +17,12 @@ const AppDispatcher = {
   },
   updateUserInfo: (data) => {
     Stores.dispatch({ type: Actions.LOGIN, data });
+  },
+  updateInc: () => {
+    Stores.dispatch(incrementNum(5));
+  },
+  updateDec: () => {
+    Stores.dispatch(decrementNum());
   }
 };
 
