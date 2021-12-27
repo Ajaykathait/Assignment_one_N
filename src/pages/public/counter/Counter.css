@@ -1,4 +1,4 @@
-button{
+.btn {
     font-size: 10rem;
     width: 200px;
     height: 200px;
@@ -6,7 +6,7 @@ button{
     text-align: center;
 }
 
-.counter{
+.counter {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -15,6 +15,6 @@ button{
     flex-flow: wrap;
 }
 
-h1{
+h1 {
     font-size: 6rem;
 }
