@@ -6,7 +6,7 @@ export default function Counter() {
 
   return (
     <div className="counter">
-      <button
+      <button className="btn"
         onClick={() => {
           count > 0
             ? setCount(count - 1)
