@@ -5,7 +5,7 @@ import PublicLayout from "../layout/publicLayout";
 
 const PublicWrapper = ({ component: Component, ...rest }) => {
   const { isLogged } = useSelector((state) => state.app);
-
+  console.log(rest + 'Rest');
   return (
     <Route
       {...rest}

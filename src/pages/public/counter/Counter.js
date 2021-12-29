@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./Counter.css";
+import styles from './Counter.module.css';
 
 export default function Counter() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="counter">
-      <button className="btn"
+    <div className={styles.counter}>
+      <button className={styles.btn}
         onClick={() => {
           count > 0
             ? setCount(count - 1)

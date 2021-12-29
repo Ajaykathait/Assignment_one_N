@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+// import Gallery from "@pages/public/imgae-gallery/Gallery";
 // import Counter from "@pages/public/counter/Counter";
 // import ReduxCounter from "@pages/public/counter-redux/ReduxCounter";
 // import SignUp from "@pages/public/signup";
@@ -19,6 +20,7 @@ export default function PublicLayout({ children }) {
       {/* <Counter /> */}
       {/* <ReduxCounter /> */}
       {/* <SignUp /> */}
+      {/* <Gallery /> */}
     </Box>
   );
 }
