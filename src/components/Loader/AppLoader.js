@@ -1,7 +1,9 @@
 import React from "react";
 
 function AppLoader() {
-  return <div>{/* Some loading component */}</div>;
+  return <div>
+    <h1>Loading...</h1>
+  </div>
 }
 
 export default AppLoader;
