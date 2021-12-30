@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import "./indexx.scss";
 
 const SignUp = () => {
@@ -7,12 +6,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState([]);
   const [rePass, setRePass] = useState([]);
-  const localStorageData = JSON.parse(localStorage.getItem("user"));
-  const [Array, setArray] = useState(
-    localStorageData ? localStorageData : []
-  );
 
-  let history = useHistory();
 
   const userDetails = {
     Name: name,
@@ -21,33 +15,14 @@ const SignUp = () => {
   };
 
 
-  const submitForm = event => {
-    // console.log(
-    //   arrayOfEmail.find(item => {
-    //     console.log(email + "the email");
-    //     item == email;
-    //   })
-    // );
-    const localData = JSON.parse(localStorage.getItem("user"));
-    let flag = false;
-    localData.map(item => {
-      return (item.Email === email ? flag = true : console.log("flag"))
-    });
+  const submitForm = (event) => {
+    const userDataByEmail = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+    userDataByEmail[email] ? (alert('exist'), event.preventDefault()) : userDataByEmail[email] = userDetails
+
+    localStorage.setItem('user', JSON.stringify(userDataByEmail));
+  }
 
 
-    flag ? (alert("This Email Already Used Please Use New Email ID"), event.preventDefault()) :
-      // T1
-      password == rePass
-        ? (setArray([...Array, userDetails]), setArray([...Array, userDetails]),
-          alert("!!!Congratulations, The SignUp is Completed"), history.push('/auth/login'))
-        : (event.preventDefault(),
-          alert("!!! Password Field and Re-Enter Password Field should match"));
-    // /T1
-  };
-
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(Array));
-  }, [Array]);
   return (
     <div>
       <div className="SignUp-page">

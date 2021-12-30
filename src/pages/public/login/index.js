@@ -9,8 +9,9 @@ const Login = () => {
   const localData = JSON.parse(localStorage.getItem("user"));
 
   const logInSubmit = (event) => {
-    (localData.some((item) => { return ((MailId == item.Email) && (Password == item.Password)) })) ? (alert("logIn Successful"), AppDispatcher.updateUserTokens()) : (alert('Email or Password is wrong'), event.preventDefault());
-
+    localData[MailId] && localData[MailId].Password === Password
+      ? (alert("logIn"), AppDispatcher.updateUserTokens())
+      : (alert("Data not Found Please SignUp Again"), event.preventDefault())
   }
 
   return (
