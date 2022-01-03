@@ -4,12 +4,12 @@ import { AppDispatcher } from "@redux/";
 
 const Login = () => {
 
-  const [MailId, setMailId] = useState('');
-  const [Password, setPassword] = useState('');
+  const [mailId, setMailId] = useState('');
+  const [password, setPassword] = useState('');
   const localData = JSON.parse(localStorage.getItem("user"));
 
   const logInSubmit = (event) => {
-    localData[MailId] && localData[MailId].Password === Password
+    localData[mailId] && localData[mailId].Password === password
       ? (alert("logIn"), AppDispatcher.updateUserTokens())
       : (alert("Data not Found Please SignUp Again"), event.preventDefault())
   }
