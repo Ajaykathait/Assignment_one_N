@@ -7,34 +7,34 @@ const SignUp = () => {
   const [password, setPassword] = useState([]);
   const [rePass, setRePass] = useState([]);
 
-
   const userDetails = {
     Name: name,
     Email: email,
     Password: password
   };
 
-
   const submitForm = (event) => {
-    const userDataByEmail = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
-    userDataByEmail[email] ? (alert('exist'), event.preventDefault()) : userDataByEmail[email] = userDetails
+    const userDataByEmail = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : {};
+    userDataByEmail[email]
+      ? (alert("exist"), event.preventDefault())
+      : (userDataByEmail[email] = userDetails);
 
-    localStorage.setItem('user', JSON.stringify(userDataByEmail));
-  }
-
+    localStorage.setItem("user", JSON.stringify(userDataByEmail));
+  };
 
   return (
     <div>
       <div className="SignUp-page">
         <form onSubmit={submitForm}>
-
           <div className="title">SignUp Page</div>
           <div className="single-input">
             <label htmlFor="">Full Name</label>
             <input
               type="text"
               placeholder="Name"
-              onChange={event => {
+              onChange={(event) => {
                 setName(event.target.value);
               }}
               required
@@ -45,7 +45,7 @@ const SignUp = () => {
             <input
               type="mail"
               placeholder="Email"
-              onChange={event => {
+              onChange={(event) => {
                 setEmail(event.target.value);
               }}
               required
@@ -56,7 +56,7 @@ const SignUp = () => {
             <input
               type="password"
               placeholder="Password"
-              onChange={event => {
+              onChange={(event) => {
                 setPassword(event.target.value);
               }}
               required
@@ -67,7 +67,7 @@ const SignUp = () => {
             <input
               type="password"
               placeholder="Re-Enter Password"
-              onChange={event => {
+              onChange={(event) => {
                 setRePass(event.target.value);
               }}
               required
@@ -91,8 +91,15 @@ const SignUp = () => {
           <button className="btn" type="submit">
             Submit
           </button>
-          <p style={{ fontSize: '.95rem', fontWeight: '600', textAlign: 'center', marginTop: '5px' }}>Go to <a href="/auth/login">LogIn Page</a></p>
-
+          <p
+            style={{
+              fontSize: ".95rem",
+              fontWeight: "600",
+              textAlign: "center",
+              marginTop: "5px"
+            }}>
+            Go to <a href="/auth/login">LogIn Page</a>
+          </p>
         </form>
       </div>
     </div>
