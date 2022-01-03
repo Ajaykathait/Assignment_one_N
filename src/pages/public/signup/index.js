@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import "./indexx.scss";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState([]);
-  const [rePass, setRePass] = useState([]);
-  const localStorageData = JSON.parse(localStorage.getItem("user"));
-  const [Array, setArray] = useState(
-    localStorageData ? localStorageData : []
-  );
-
-  let history = useHistory();
+  const [rePassword, setRePassword] = useState([]);
 
   const userDetails = {
     Name: name,
@@ -21,45 +14,30 @@ const SignUp = () => {
   };
 
 
-  const submitForm = event => {
-    // console.log(
-    //   arrayOfEmail.find(item => {
-    //     console.log(email + "the email");
-    //     item == email;
-    //   })
-    // );
-    const localData = JSON.parse(localStorage.getItem("user"));
-    let flag = false;
-    localData.map(item => {
-      return (item.Email === email ? flag = true : console.log("flag"))
-    });
+  //signUp logic
+  const submitForm = (event) => {
+    const userDataByEmail = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : {};
+    userDataByEmail[email]
+      ? (alert("exist"), event.preventDefault())
+      : ((userDataByEmail[email] = userDetails),
+        alert("You Have Successfully logIn"));
 
-
-    flag ? (alert("This Email Already Used Please Use New Email ID"), event.preventDefault()) :
-      // T1
-      password == rePass
-        ? (setArray([...Array, userDetails]), setArray([...Array, userDetails]),
-          alert("!!!Congratulations, The SignUp is Completed"), history.push('/auth/login'))
-        : (event.preventDefault(),
-          alert("!!! Password Field and Re-Enter Password Field should match"));
-    // /T1
+    localStorage.setItem("user", JSON.stringify(userDataByEmail)); //sending data to local storage 
   };
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(Array));
-  }, [Array]);
   return (
     <div>
       <div className="SignUp-page">
         <form onSubmit={submitForm}>
-
           <div className="title">SignUp Page</div>
           <div className="single-input">
             <label htmlFor="">Full Name</label>
             <input
               type="text"
               placeholder="Name"
-              onChange={event => {
+              onChange={(event) => {
                 setName(event.target.value);
               }}
               required
@@ -68,9 +46,9 @@ const SignUp = () => {
           <div className="single-input">
             <label htmlFor="">Email</label>
             <input
-              type="mail"
+              type="email"
               placeholder="Email"
-              onChange={event => {
+              onChange={(event) => {
                 setEmail(event.target.value);
               }}
               required
@@ -81,7 +59,7 @@ const SignUp = () => {
             <input
               type="password"
               placeholder="Password"
-              onChange={event => {
+              onChange={(event) => {
                 setPassword(event.target.value);
               }}
               required
@@ -92,32 +70,37 @@ const SignUp = () => {
             <input
               type="password"
               placeholder="Re-Enter Password"
-              onChange={event => {
-                setRePass(event.target.value);
+              onChange={(event) => {
+                setRePassword(event.target.value);
               }}
               required
             />
           </div>
 
           <div>
-            {password.length <= rePass.length && password.length != 0 ? (
-              password == rePass ? (
-                <p style={{ color: "green" }}>Password is Matched</p>
-              ) : (
-                <p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>
-              )
-            ) : null}
+            {password.length <= rePassword.length && password.length != 0 ? (
+              password == rePassword
+                ? (<p style={{ color: "green" }}>Password is Matched</p>)
+                : (<p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>))
+              : "...."}
           </div>
 
           <p style={{ display: "none" }}>
-            {name} {email} {password} {rePass}
+            {name} {email} {password} {rePassword}
           </p>
 
           <button className="btn" type="submit">
             Submit
           </button>
-          <p style={{ fontSize: '.95rem', fontWeight: '600', textAlign: 'center', marginTop: '5px' }}>Go to <a href="/auth/login">LogIn Page</a></p>
-
+          <p
+            style={{
+              fontSize: ".95rem",
+              fontWeight: "600",
+              textAlign: "center",
+              marginTop: "5px"
+            }}>
+            Go to <a href="/auth/login">LogIn Page</a>
+          </p>
         </form>
       </div>
     </div>

@@ -3,21 +3,20 @@ import "../signup/indexx.scss";
 import { AppDispatcher } from "@redux/";
 
 const Login = () => {
-
-  const [MailId, setMailId] = useState('');
-  const [Password, setPassword] = useState('');
+  const [mailId, setMailId] = useState("");
+  const [password, setPassword] = useState("");
   const localData = JSON.parse(localStorage.getItem("user"));
 
   const logInSubmit = (event) => {
-    (localData.some((item) => { return ((MailId == item.Email) && (Password == item.Password)) })) ? (alert("logIn Successful"), AppDispatcher.updateUserTokens()) : (alert('Email or Password is wrong'), event.preventDefault());
-
-  }
+    localData[mailId] && localData[mailId].Password === password
+      ? (alert("logIn"), AppDispatcher.updateUserTokens())
+      : (alert("Data not Found Please SignUp Again"), event.preventDefault());
+  };
 
   return (
     <div>
       <div className="SignUp-page">
         <form onSubmit={logInSubmit}>
-
           <div className="title">LogIn Page</div>
           <div className="single-input">
             <label htmlFor="">Email ID</label>
@@ -26,7 +25,7 @@ const Login = () => {
               placeholder="Email"
               required
               onChange={(event) => {
-                setMailId(event.target.value)
+                setMailId(event.target.value);
               }}
             />
           </div>
@@ -37,7 +36,7 @@ const Login = () => {
               placeholder="Password"
               required
               onChange={(event) => {
-                setPassword(event.target.value)
+                setPassword(event.target.value);
               }}
             />
           </div>
@@ -45,7 +44,15 @@ const Login = () => {
           <button className="btn" type="submit">
             Submit
           </button>
-          <p style={{ fontSize: '.95rem', fontWeight: '600', textAlign: 'center', marginTop: '5px' }}>Go to <a href="/auth/signup">SignUp Page</a></p>
+          <p
+            style={{
+              fontSize: ".95rem",
+              fontWeight: "600",
+              textAlign: "center",
+              marginTop: "5px"
+            }}>
+            Go to <a href="/auth/signup">SignUp Page</a>
+          </p>
         </form>
       </div>
     </div>
