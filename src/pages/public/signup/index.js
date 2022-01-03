@@ -5,7 +5,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState([]);
-  const [rePass, setRePass] = useState([]);
+  const [rePassword, setRePassword] = useState([]);
 
   const userDetails = {
     Name: name,
@@ -19,7 +19,8 @@ const SignUp = () => {
       : {};
     userDataByEmail[email]
       ? (alert("exist"), event.preventDefault())
-      : (userDataByEmail[email] = userDetails);
+      : ((userDataByEmail[email] = userDetails),
+        alert("You Have Successfully logIn"));
 
     localStorage.setItem("user", JSON.stringify(userDataByEmail));
   };
@@ -68,15 +69,15 @@ const SignUp = () => {
               type="password"
               placeholder="Re-Enter Password"
               onChange={(event) => {
-                setRePass(event.target.value);
+                setRePassword(event.target.value);
               }}
               required
             />
           </div>
 
           <div>
-            {password.length <= rePass.length && password.length != 0 ? (
-              password == rePass ? (
+            {password.length <= rePassword.length && password.length != 0 ? (
+              password == rePassword ? (
                 <p style={{ color: "green" }}>Password is Matched</p>
               ) : (
                 <p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>
@@ -85,7 +86,7 @@ const SignUp = () => {
           </div>
 
           <p style={{ display: "none" }}>
-            {name} {email} {password} {rePass}
+            {name} {email} {password} {rePassword}
           </p>
 
           <button className="btn" type="submit">
