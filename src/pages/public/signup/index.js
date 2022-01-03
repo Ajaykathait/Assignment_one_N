@@ -13,6 +13,8 @@ const SignUp = () => {
     Password: password
   };
 
+
+  //signUp logic
   const submitForm = (event) => {
     const userDataByEmail = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -22,7 +24,7 @@ const SignUp = () => {
       : ((userDataByEmail[email] = userDetails),
         alert("You Have Successfully logIn"));
 
-    localStorage.setItem("user", JSON.stringify(userDataByEmail));
+    localStorage.setItem("user", JSON.stringify(userDataByEmail)); //sending data to local storage 
   };
 
   return (
@@ -44,7 +46,7 @@ const SignUp = () => {
           <div className="single-input">
             <label htmlFor="">Email</label>
             <input
-              type="mail"
+              type="email"
               placeholder="Email"
               onChange={(event) => {
                 setEmail(event.target.value);
@@ -77,12 +79,10 @@ const SignUp = () => {
 
           <div>
             {password.length <= rePassword.length && password.length != 0 ? (
-              password == rePassword ? (
-                <p style={{ color: "green" }}>Password is Matched</p>
-              ) : (
-                <p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>
-              )
-            ) : null}
+              password == rePassword
+                ? (<p style={{ color: "green" }}>Password is Matched</p>)
+                : (<p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>))
+              : "...."}
           </div>
 
           <p style={{ display: "none" }}>
