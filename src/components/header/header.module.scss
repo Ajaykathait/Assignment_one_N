@@ -1,0 +1,43 @@
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 2rem;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: rgb(240, 236, 236);
+  .left_navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+    justify-content: space-between;
+
+    .logo {
+      font-size: 2.3rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+    .other_navigations {
+      display: flex;
+      flex-direction: row;
+      gap: 4vw;
+      .single_navigation {
+        a {
+          font-size: 1.4rem;
+          color: #1c1c25;
+          text-decoration: none;
+          font-weight: 600;
+          &:hover {
+            text-decoration: underline;
+            color: #8655ff;
+          }
+        }
+      }
+    }
+  }
+
+  .right_navigation {
+  }
+}
