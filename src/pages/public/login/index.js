@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../signup/indexx.scss";
 import { AppDispatcher } from "@redux/";
+import { useTheme } from "@emotion/react";
 
 const Login = () => {
   const [mailId, setMailId] = useState("");
@@ -13,9 +14,11 @@ const Login = () => {
       : (alert("Data not Found Please SignUp Again"), event.preventDefault());
   };
 
+  const theme = useTheme();
+
   return (
     <div>
-      <div className="SignUp-page">
+      <div className={theme.darkMode ? "SignUp-page_dark" : "SignUp-page"}>
         <form onSubmit={logInSubmit}>
           <div className="title">LogIn Page</div>
           <div className="single-input">
