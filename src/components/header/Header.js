@@ -7,17 +7,16 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const theme = useTheme();
   const toggleTheme = () => {
-    theme.darkMode
-      ? (theme.setDarkMode(false),
+    theme.isDarkMode
+      ? (theme.setIsDarkMode(false),
         (document.body.style.backgroundColor = "#8655ff"))
-      : (theme.setDarkMode(true),
+      : (theme.setIsDarkMode(true),
         (document.body.style.backgroundColor = "#999"));
   };
-  console.log(theme.darkMode);
 
   return (
     <header
-      className={theme.darkMode ? styles.header_bar_dark : styles.header_bar}>
+      className={theme.isDarkMode ? styles.header_bar_dark : styles.header_bar}>
       <div className={styles.left_navigation}>
         <div className={styles.logo}>LOGO</div>
         <div className={styles.other_navigations}>
@@ -35,7 +34,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Switch checked={theme.darkMode} onChange={toggleTheme} />
+      <Switch checked={theme.isDarkMode} onChange={toggleTheme} />
     </header>
   );
 };

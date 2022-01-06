@@ -4,7 +4,6 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  // margin-top: 2rem;
   min-height: 100vh;
   form {
     display: flex;
@@ -63,9 +62,8 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: rgb(46, 45, 45);
-  // margin-top: 2rem;
   min-height: 100vh;
+  color: rgb(228, 225, 225);
   form {
     display: flex;
     flex-direction: column;
@@ -73,7 +71,7 @@
     padding: 2rem 20px;
     background-color: rgb(70, 69, 69);
     border-radius: 5px;
-    border: solid 2px rgb(224, 224, 224);
+    border: solid 2px rgb(41, 41, 41);
 
     .title {
       font-size: 2rem;
