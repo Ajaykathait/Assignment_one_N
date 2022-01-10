@@ -1,32 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import { Grid } from '@mui/material';
-import AppLoader from '@components/Loader/AppLoader';
+import React, { useState, useEffect } from "react";
+import { Grid } from "@mui/material";
+import AppLoader from "@components/Loader/AppLoader";
+import { API, NetworkManager } from "@network/core";
 function Gallery() {
-    const [Gallery, setGallery] = useState(null)
-    useEffect(() => {
-        const urlNew = 'https://picsum.photos/v2/list';
-        fetch(urlNew).then(resp => resp.json()).then(resp => setGallery(resp))
-    }, [])
+  const [gallery, setGallery] = useState(null);
 
-    return (
-        <>
-            <React.Fragment className="gallery">
-                <h2>Gallery</h2>
-                {Gallery ? <Grid container>
-                    {Gallery.map((item) => {
-                        return (
-                            <React.Fragment key={(item.id)}>
-                                <Grid item xs={12} sm={12} md={6} lg={6} xl={4} >
-                                    <img style={{ width: '400px', height: '250px', objectFit: 'cover' }} src={item.download_url} alt="img" />
-                                </Grid>
-                            </React.Fragment>
-                        )
-                    })}
-                </Grid> : <AppLoader />}
+  const instanceOfNetwork = new NetworkManager(API.GALLERY.DATA);
 
-            </React.Fragment>
-        </>
-    )
+  useEffect(() => {
+    instanceOfNetwork
+      .httpRequest(false)
+      .then((res) => setGallery(res.data))
+      .catch((error) => console.log(error));
+  }, []);
+  return (
+    <>
+      <div className="gallery">
+        <h2>Gallery</h2>
+        {gallery ? (
+          <Grid container>
+            {gallery.map((item) => {
+              return (
+                <React.Fragment key={item.id}>
+                  <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+                    <img
+                      style={{
+                        width: "400px",
+                        height: "250px",
+                        objectFit: "cover"
+                      }}
+                      src={item.download_url}
+                      alt="img"
+                    />
+                  </Grid>
+                </React.Fragment>
+              );
+            })}
+          </Grid>
+        ) : (
+          <AppLoader />
+        )}
+      </div>
+    </>
+  );
 }
 
-export default Gallery
+export default Gallery;

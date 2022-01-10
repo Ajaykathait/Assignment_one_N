@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../signup/indexx.scss";
 import { AppDispatcher } from "@redux/";
+import { useTheme } from "../../../components/header/NightThemeProvider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [mailId, setMailId] = useState("");
@@ -13,9 +15,12 @@ const Login = () => {
       : (alert("Data not Found Please SignUp Again"), event.preventDefault());
   };
 
+  const theme = useTheme();
+  const lightTheme = "SignUp-page";
+  const darkTheme = "SignUp-page_dark";
   return (
     <div>
-      <div className="SignUp-page">
+      <div className={theme.isDarkMode ? darkTheme : lightTheme}>
         <form onSubmit={logInSubmit}>
           <div className="title">LogIn Page</div>
           <div className="single-input">
@@ -51,7 +56,10 @@ const Login = () => {
               textAlign: "center",
               marginTop: "5px"
             }}>
-            Go to <a href="/auth/signup">SignUp Page</a>
+            Go to{" "}
+            <Link style={{ color: "#966cff" }} to="/auth/signup">
+              SignUp Page
+            </Link>
           </p>
         </form>
       </div>

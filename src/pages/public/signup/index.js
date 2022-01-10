@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useTheme } from "../../../components/header/NightThemeProvider";
 import "./indexx.scss";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -13,7 +15,6 @@ const SignUp = () => {
     Password: password
   };
 
-
   //signUp logic
   const submitForm = (event) => {
     const userDataByEmail = localStorage.getItem("user")
@@ -24,12 +25,15 @@ const SignUp = () => {
       : ((userDataByEmail[email] = userDetails),
         alert("You Have Successfully logIn"));
 
-    localStorage.setItem("user", JSON.stringify(userDataByEmail)); //sending data to local storage 
+    localStorage.setItem("user", JSON.stringify(userDataByEmail)); //sending data to local storage
   };
+  const theme = useTheme();
+  const lightTheme = "SignUp-page";
+  const darkTheme = "SignUp-page_dark";
 
   return (
     <div>
-      <div className="SignUp-page">
+      <div className={theme.isDarkMode ? darkTheme : lightTheme}>
         <form onSubmit={submitForm}>
           <div className="title">SignUp Page</div>
           <div className="single-input">
@@ -79,10 +83,14 @@ const SignUp = () => {
 
           <div>
             {password.length <= rePassword.length && password.length != 0 ? (
-              password == rePassword
-                ? (<p style={{ color: "green" }}>Password is Matched</p>)
-                : (<p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>))
-              : "...."}
+              password == rePassword ? (
+                <p style={{ color: "green" }}>Password is Matched</p>
+              ) : (
+                <p style={{ color: "red" }}>!! Password doesn&apos;t Match</p>
+              )
+            ) : (
+              "...."
+            )}
           </div>
 
           <p style={{ display: "none" }}>
@@ -99,7 +107,10 @@ const SignUp = () => {
               textAlign: "center",
               marginTop: "5px"
             }}>
-            Go to <a href="/auth/login">LogIn Page</a>
+            Go to{" "}
+            <Link style={{ color: "#966cff" }} to="/auth/login">
+              LogIn Page
+            </Link>
           </p>
         </form>
       </div>
