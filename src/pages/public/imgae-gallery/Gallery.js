@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import AppLoader from "@components/Loader/AppLoader";
+import { API, NetworkManager } from "@network/core";
 function Gallery() {
-  const [Gallery, setGallery] = useState(null);
-  useEffect(() => {
-    const urlNew = "https://picsum.photos/v2/list";
-    fetch(urlNew)
-      .then((resp) => resp.json())
-      .then((resp) => setGallery(resp));
-  }, []);
+  const [gallery, setGallery] = useState(null);
 
+  const instanceOfNetwork = new NetworkManager(API.GALLERY.DATA);
+
+  useEffect(() => {
+    instanceOfNetwork
+      .httpRequest(false)
+      .then((res) => setGallery(res.data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <>
       <div className="gallery">
         <h2>Gallery</h2>
-        {Gallery ? (
+        {gallery ? (
           <Grid container>
-            {Gallery.map((item) => {
+            {gallery.map((item) => {
               return (
                 <React.Fragment key={item.id}>
                   <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
