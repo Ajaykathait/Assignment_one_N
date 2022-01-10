@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import AppLoader from "@components/Loader/AppLoader";
 import { API, NetworkManager } from "@network/core";
@@ -6,14 +6,13 @@ function Gallery() {
   const [gallery, setGallery] = useState(null);
 
   const instanceOfNetwork = new NetworkManager(API.GALLERY.DATA);
-  instanceOfNetwork
-    .httpRequest(false)
-    .then((res) => res.data)
-    .then((data) => {
-      setGallery(data);
-    })
-    .catch((error) => console.log(error));
 
+  useEffect(() => {
+    instanceOfNetwork
+      .httpRequest(false)
+      .then((res) => setGallery(res.data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <>
       <div className="gallery">
